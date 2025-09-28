@@ -1,21 +1,28 @@
-Pillow==10.3.0
-Django==4.2.16
+# Framework principal
+Django==4.2.23
+
+# Django REST Framework
 djangorestframework==3.16.1
 
-# Dependências de tempo e datas
-pytz==2025.2
-python-dateutil==2.9.0
-sqlparse>=0.4.4
+# Banco de dados
+psycopg2-binary==2.9.8  # se usar PostgreSQL
+# mysqlclient==2.2.0    # se usar MySQL
+# OBS: Se usar SQLite, não precisa de pacote adicional
 
-# Servidor WSGI para produção
+# Fuso horário
+pytz==2025.2
+
+# Datas
+python-dateutil==2.9.0
+
+# SQL parser
+sqlparse==0.5.3
+
+# Servidor WSGI
 gunicorn==23.0.0
 
-# Suporte ASGI
-asgiref==3.8.1
-
-# Manipulação de imagens
+# Pillow para imagens
 Pillow==10.3.0
 
-# DNS para possíveis integrações
+# DNS para integração com Mongo (se precisar)
 dnspython==2.7.0
-
