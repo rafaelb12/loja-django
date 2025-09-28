@@ -1,5 +1,5 @@
 # Framework principal
-Django==4.2.23
+Django==3.1.12
 
 # Django REST framework
 djangorestframework==3.16.1
@@ -20,3 +20,4 @@ Pillow==10.3.0
 
 # DNS para possíveis integrações
 dnspython==2.7.0
+
