@@ -1,0 +1,46 @@
+{% extends 'produtos/base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center">Produtos</h2>
+
+{% if query %}
+<p class="text-center">Resultados para: <strong>{{ query }}</strong></p>
+{% endif %}
+
+
+
+<div class="row">
+    {% for produto in produtos %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sem imagem">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ produto.nome }}</h5>
+                <p class="card-text text-truncate">{{ produto.descricao|truncatechars:80 }}</p>
+                <p class="card-text fw-bold text-primary">R$ {{ produto.preco }}</p>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-outline-primary btn-sm">Detalhes</a>
+                   <a href="#" class="btn-toggle-curtir position-relative" data-id="{{ produto.id }}">
+                        {% if user.is_authenticated and user in produto.curtido_por.all %}
+                            <i class="fas fa-heart text-danger"></i>
+                        {% else %}
+                            <i class="far fa-heart"></i>
+                        {% endif %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            id="likes-count-{{ produto.id }}">
+                            {{ produto.curtido_por.count }}
+                        </span>
+                    </a>
+                    <a href="{% url 'adicionar_carrinho' produto.id %}" class="btn btn-success btn-sm">Adicionar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Nenhum produto encontrado.</p>
+    {% endfor %}
+</div>
+{% endblock %}

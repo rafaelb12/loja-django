@@ -1,0 +1,6 @@
+{% extends 'produtos/base.html' %}
+{% block content %}
+<h2>Pedido realizado com sucesso!</h2>
+<p>Obrigado, {{ pedido.nome_cliente }}. Seu pedido nº {{ pedido.id }} foi registrado.</p>
+<a href="{% url 'lista_produtos' %}" class="btn btn-primary mt-3">Voltar à loja</a>
+{% endblock %}

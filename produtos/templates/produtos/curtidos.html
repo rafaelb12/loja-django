@@ -1,0 +1,33 @@
+{% extends 'produtos/base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center">❤️ Produtos Curtidos</h2>
+
+{% if produtos %}
+<div class="row">
+    {% for produto in produtos %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sem imagem">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ produto.nome }}</h5>
+                <p class="card-text text-truncate">{{ produto.descricao|truncatechars:80 }}</p>
+                <p class="card-text fw-bold text-primary">R$ {{ produto.preco }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-outline-primary btn-sm">Detalhes</a>
+                    <a href="{% url 'curtir_produto' produto.id %}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-heart"></i> Remover
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p class="text-center text-muted">Você ainda não curtiu nenhum produto.</p>
+{% endif %}
+{% endblock %}

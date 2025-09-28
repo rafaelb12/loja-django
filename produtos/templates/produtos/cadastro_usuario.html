@@ -1,0 +1,13 @@
+{% extends "produtos/base.html" %}
+{% block content %}
+<h2>Cadastro</h2>
+<form method="post">{% csrf_token %}
+  <input type="text" name="username" placeholder="Usuário" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="password" name="password" placeholder="Senha" required>
+  <button type="submit">Cadastrar</button>
+  {% if erro %}<p style="color:red">{{ erro }}</p>{% endif %}
+</form>
+
+<p>Já tem conta? <a href="{% url 'login_usuario' %}">Entre aqui</a></p>
+{% endblock %}

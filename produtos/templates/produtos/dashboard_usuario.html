@@ -1,0 +1,41 @@
+{% extends "produtos/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Minha Conta</h2>
+
+    {% if pedidos %}
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>ID do Pedido</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.created_at|date:"d/m/Y H:i" }}</td>
+                <td>R$ {{ pedido.total|floatformat:2 }}</td>
+                <td>
+                    {% if pedido.pago %}
+                        <span class="badge bg-success">Pago</span>
+                    {% else %}
+                        <span class="badge bg-warning">Aguardando Pagamento</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'detalhe_pedido' pedido.id %}" class="btn btn-sm btn-primary">Detalhes</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="text-center">Você ainda não realizou nenhum pedido.</p>
+    {% endif %}
+</div>
+{% endblock %}

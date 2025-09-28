@@ -1,0 +1,38 @@
+{% extends "produtos/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Checkout</h2>
+
+    {% if carrinho %}
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, item in carrinho.items %}
+                <tr>
+                    <td>{{ item.nome }}</td>
+                    <td>R$ {{ item.preco|floatformat:2 }}</td>
+                    <td>{{ item.quantidade }}</td>
+                    <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 class="text-end mb-4">Total: R$ {{ total|floatformat:2 }}</h4>
+
+        <form method="post">{% csrf_token %}
+            <button type="submit" class="btn btn-success btn-lg w-100">Finalizar Compra</button>
+        </form>
+    {% else %}
+        <p class="text-center">Seu carrinho está vazio.</p>
+    {% endif %}
+</div>
+{% endblock %}

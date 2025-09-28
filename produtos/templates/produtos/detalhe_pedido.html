@@ -1,0 +1,39 @@
+{% extends "produtos/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Pedido #{{ pedido.id }}</h2>
+
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for id, item in pedido.produtos.items %}
+            <tr>
+                <td>{{ item.nome }}</td>
+                <td>R$ {{ item.preco|floatformat:2 }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>R$ {{ item.preco|floatformat:2|floatformat:2|add:"0" * item.quantidade }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="text-end mb-3">Total: R$ {{ pedido.total|floatformat:2 }}</h4>
+
+    {% if not pedido.pago %}
+    <div class="text-center">
+        <p>Use o QR Code abaixo para finalizar o pagamento via Pix:</p>
+        <img src="data:image/png;base64,{{ pedido.pix_qr }}" alt="QR Code Pix" class="img-fluid" style="max-width:300px;">
+        <p class="mt-2">Chave Pix: {{ pedido.pix_chave }}</p>
+    </div>
+    {% else %}
+        <p class="text-center text-success fw-bold">Pedido pago com sucesso!</p>
+    {% endif %}
+</div>
+{% endblock %}
