@@ -1,7 +1,5 @@
-# Framework principal
-Django==3.1.12
-
-# Django REST framework
+Pillow==10.3.0
+Django==4.2.23
 djangorestframework==3.16.1
 
 # Dependências de tempo e datas
