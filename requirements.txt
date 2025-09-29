@@ -29,4 +29,4 @@ dnspython==2.7.0
 
 # WhiteNoise para servir arquivos estáticos
 whitenoise==6.6.0
-pybrcode==0.4.2
+pybrcode==0.0.8
