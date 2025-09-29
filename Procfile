@@ -1,1 +1,1 @@
-web: gunicorn loja.wsgi:application
+web: gunicorn loja.wsgi --log-file -
