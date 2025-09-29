@@ -5,15 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import ProdutoForm, ProfileForm, CadastroUsuarioForm
 from io import BytesIO
+
 try:
     from pybrcode.pix import generate_simple_pix
 except ModuleNotFoundError:
     generate_simple_pix = None
     
-if generate_simple_pix is not None:
-    qr_code = generate_simple_pix(valor, chave_pix, info_pagador)
-else:
-    qr_code = None
+
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -242,6 +240,9 @@ def pix_pagamento(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)
 
     if not pedido.pix_qr:
+        if generate_simple_pix is None:
+            return HttpResponse("Pagamento Pix indisponível.", status=503)
+
         chave_pix = "rafaelbsantos364@gmail.com" 
         cidade = "Itapipoca"
         nome_recebedor = "Rafael Bezerra dos Santos"  
@@ -259,7 +260,6 @@ def pix_pagamento(request, pedido_id):
         qr.save(buffer, format='PNG')
         pix_qr_base64 = base64.b64encode(buffer.getvalue()).decode()
 
-        
         pedido.pix_chave = chave_pix
         pedido.pix_qr = pix_qr_base64
         pedido.save()
