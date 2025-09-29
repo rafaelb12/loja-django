@@ -1,3 +1,8 @@
+try:
+    from pybrcode.pix import generate_simple_pix
+except ModuleNotFoundError:
+    generate_simple_pix = None
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Produto, Pedido, Categoria, Profile
 from django.contrib.auth import authenticate, login, logout
@@ -5,13 +10,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import ProdutoForm, ProfileForm, CadastroUsuarioForm
 from io import BytesIO
-
-try:
-    from pybrcode.pix import generate_simple_pix
-except ModuleNotFoundError:
-    generate_simple_pix = None
-    
-
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
