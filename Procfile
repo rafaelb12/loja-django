@@ -1,1 +1,2 @@
-web: gunicorn loja.wsgi:application --bind 0.0.0.0:8080
+release: pip install -r requirements.txt
+web: gunicorn loja.wsgi:application --bind 0.0.0.0:$PORT
