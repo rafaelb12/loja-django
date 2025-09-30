@@ -74,7 +74,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'loja.wsgi.application'
 
 import os
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "web-production-995d.up.railway.app", "127.0.0.1", "localhost"]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
