@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6p+kj3)-8px00+-u3mszcw1tz7)!m&-xzv5*0@)bf-ya%8di!='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 
@@ -77,7 +77,7 @@ import os
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "web-production-995d.up.railway.app",
+    os.getenv("RAILWAY_STATIC_URL", "web-production-995d.up.railway.app"),
 ]
 
 MEDIA_URL = '/media/'
