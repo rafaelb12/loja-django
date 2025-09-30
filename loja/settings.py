@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6p+kj3)-8px00+-u3mszcw1tz7)!m&-xzv5*0@)bf-ya%8di!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["web-production-995d.up.railway.app", "127.0.0.1", "localhost"]
+
 
 
 # Application definition
@@ -74,7 +74,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'loja.wsgi.application'
 
 import os
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "web-production-995d.up.railway.app",
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
