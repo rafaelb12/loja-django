@@ -1,7 +1,5 @@
-try:
-    from pybrcode.pix import generate_simple_pix
-except ModuleNotFoundError:
-    generate_simple_pix = None
+from pybrcode import generate_simple_pix
+
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Produto, Pedido, Categoria, Profile
